@@ -1,0 +1,3 @@
+Single Word Entry	5966
+Total Single word Entries	15905
+Wrong Multi Word Entries	22

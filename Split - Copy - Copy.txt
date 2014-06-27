@@ -1,0 +1,91 @@
+import java.io.*;
+/**
+ * @(#)Split.java
+ *
+ *
+ * @author 
+ * @version 1.00 2009/4/8
+ */
+
+public class Split {
+        
+    /**
+     * Creates a new instance of <code>Split</code>.
+     */
+    public Split() {
+    }
+    
+    static String tus[][]=new String[10000][300];
+    static int tus_count[]=new int[300];
+    static int count;
+    
+    public static void file_update(String path,String txt) 
+	{
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(path);
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos,"UTF-8"));
+			bw.write(txt);
+			bw.flush();
+			fos.close();
+		}catch(IOException f){}	
+	}
+	
+	
+	public static boolean eng_is_vowel(char k) 
+	{
+		boolean flag=false;
+		if(k=='a' ||k=='e' ||k=='i' ||k=='o' ||k=='u')
+		{
+			flag=true;
+		}
+		return flag;
+	}
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        String tu="";
+        int n=0;
+        
+        try
+		{
+			FileInputStream fis = new FileInputStream("Dev_test.txt");
+			BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+			String line;
+			while((line = br.readLine())!=null)
+			{
+				System.out.println(line);
+				for(int i=0;i<line.length();i++)
+				{
+					line=line.toLowerCase();
+					
+					char ch=line.charAt(i);
+					if(eng_is_vowel(ch))
+					{
+						tu+=ch;
+						System.out.print(n+"{{"+tu+"**");
+						tus[count][n]=tu;
+						n++;
+						tu="";
+					}
+					else
+					{
+						tu+=ch;
+					}
+				}
+				System.out.print(tu+"**");
+				tu="";
+				//System.out.println("\n########");
+				//tus_count[count]=n;
+				count++;
+				n=0;
+			}
+			fis.close();
+		}catch(IOException f){}
+		//file_update("Pinaki_BNG.txt",str.toString());
+    }
+}
